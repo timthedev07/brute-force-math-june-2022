@@ -15,50 +15,50 @@ Problem statement:
 
 
 class Fraction:
-    def __init__(self, nominator, denominator):
+    def __init__(self, numerator, denominator):
         self.denominator = denominator
-        self.nominator = nominator
+        self.numerator = numerator
         
         if denominator != 0:
             self.simplify()
 
     def simplify(self):
         a = self.denominator
-        b = self.nominator
+        b = self.numerator
         gcd = math.gcd(a, b)
         self.denominator = a // gcd
-        self.nominator = b // gcd
+        self.numerator = b // gcd
 
     def lcm(self, a, b):
         return math.fabs(a * b) // math.gcd(a, b)
 
     def divide(self, fraction):
-        self.nominator = int(self.nominator * fraction.denominator)
-        self.denominator = int(self.denominator * fraction.nominator)
+        self.numerator = int(self.numerator * fraction.denominator)
+        self.denominator = int(self.denominator * fraction.numerator)
 
         self.simplify()
     
     def add(self, fraction):
-        if fraction.nominator == 0 or fraction.denominator == 0:
+        if fraction.numerator == 0 or fraction.denominator == 0:
             return
-        elif self.nominator == 0 or self.denominator == 0:
-            self.nominator = fraction.nominator
+        elif self.numerator == 0 or self.denominator == 0:
+            self.numerator = fraction.numerator
             self.denominator = fraction.denominator
             return
             
         denominatorLcm = int(self.lcm(int(fraction.denominator), int(self.denominator)))
-        newNominator = self.nominator * (denominatorLcm / self.denominator) + fraction.nominator * (denominatorLcm / fraction.denominator)
+        newNominator = self.numerator * (denominatorLcm / self.denominator) + fraction.numerator * (denominatorLcm / fraction.denominator)
 
-        self.nominator = int(newNominator)
+        self.numerator = int(newNominator)
         self.denominator = denominatorLcm
 
         self.simplify()
 
     def __str__(self, indent = 0):
-        return f"{' ' * indent}Fraction: [{int(self.nominator)} / {int(self.denominator)}]\n{' ' * indent}Decimal Equivalent: {self.toDecimal()}"
+        return f"{' ' * indent}Fraction: [{int(self.numerator)} / {int(self.denominator)}]\n{' ' * indent}Decimal Equivalent: {self.toDecimal()}"
 
     def toDecimal(self):
-        return self.nominator / self.denominator
+        return self.numerator / self.denominator
 
 
 def decorateText(text, decorator):
